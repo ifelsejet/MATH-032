@@ -8,11 +8,11 @@
 # Create Variables #
 ####################
 
-numTrials  = 100;
-totalBlack = 4;
+numTrials  = 10000;
+totalBlack = 3;
 totalRed   = 4;
 totalBalls = totalBlack+totalRed;
-ballsToDraw = 4;
+ballsToDraw = 3;
 
 #Urn is an "vector" with the words "red" and "black" the correct number of times
 urn        = c(replicate(totalRed,"red"),replicate(totalBlack,"black"))
@@ -54,7 +54,7 @@ trueProb    = 0*c(0:ballsToDraw);
 ##################
 # Then we draw: {R,R,R,R}
 # We are choosing "0" black out of 4.
-trueProb[1] = choose(ballsToDraw,0)*(totalRed/totalBalls)*((totalRed-1)/(totalBalls-1))*((totalRed-2)/(totalBalls-2))*((totalRed-3)/(totalBalls-3));
+trueProb[1] = choose(ballsToDraw,0)*(totalRed/totalBalls)*((totalRed-1)/(totalBalls-1))*((totalRed-2)/(totalBalls-2));
 
 ##################
 #P(Draw 1 Black) #
@@ -62,7 +62,7 @@ trueProb[1] = choose(ballsToDraw,0)*(totalRed/totalBalls)*((totalRed-1)/(totalBa
 # The we either draw: {B,R,R,R}, {R,B,R,R}, {R,R,B,R}, {R,R,R,B}
 # Each of these outcomes has the same probability (since order doesn't matter)
 # P(Draw 1 Black) = choose(4,1) P(R,R,R,B) 
-trueProb[2] = choose(ballsToDraw,1)*(totalRed/totalBalls)*((totalRed-1)/(totalBalls-1))*((totalRed-2)/(totalBalls-2))*(totalBlack/(totalBalls-3))
+trueProb[2] = choose(ballsToDraw,1)*(totalRed/totalBalls)*((totalRed-1)/(totalBalls-1))*(totalBlack/(totalBalls-2));
 
 ##################
 #P(Draw 2 Black) #
@@ -73,7 +73,7 @@ trueProb[2] = choose(ballsToDraw,1)*(totalRed/totalBalls)*((totalRed-1)/(totalBa
 # 1st Black on 3rd Pick: {R,R,B,B}
 # Each of these outcomes has the same probability (since order doesn't matter)
 # P(Draw 2 Black) = choose(4,2)*P(R,R,B,B)
-trueProb[3] = choose(ballsToDraw,2)*(totalRed/totalBalls)*((totalRed-1)/(totalBalls-1))*(totalBlack/(totalBalls-2))*((totalBlack-1)/(totalBalls-3));
+trueProb[3] = choose(ballsToDraw,2)*(totalRed/totalBalls)*((totalBlack)/(totalBalls-1))*((totalBlack-1)/(totalBalls-2));
 
 ##################
 #P(Draw 3 Black) #
@@ -83,14 +83,14 @@ trueProb[3] = choose(ballsToDraw,2)*(totalRed/totalBalls)*((totalRed-1)/(totalBa
 # 1st Black on 2nd Pick: {R,B,B,B}
 # Each of these outcomes has the same probability (since order doesn't matter)
 # P(Draw 3 Black) = choose(4,3)*P(B,B,B,R)
-trueProb[4] = choose(ballsToDraw,3)*(totalBlack/totalBalls)*((totalBlack-1)/(totalBalls-1))*((totalBlack-2)/(totalBalls-2))*(totalRed/(totalBalls-3));
+trueProb[4] = choose(ballsToDraw,3)*(totalBlack/totalBalls)*((totalBlack-1)/(totalBalls-1))*((totalBlack-2)/(totalBalls-2));
 
 ##################
 #P(Draw 4 Black) #
 ##################
 # Then we draw: {B,B,B,B}
 # We are choosing all 4 black out of 4.
-trueProb[5] = choose(ballsToDraw,4)*(totalBlack/totalBalls)*((totalBlack-1)/(totalBalls-1))*((totalBlack-2)/(totalBalls-2))*((totalBlack-3)/(totalBalls-3));
+#trueProb[5] = choose(ballsToDraw,4)*(totalBlack/totalBalls)*((totalBlack-1)/(totalBalls-1))*((totalBlack-2)/(totalBalls-2))*((totalBlack-3)/(totalBalls-3));
 
 ############################################################
 # Plot and Compare the Experimental and True Probabilities #
