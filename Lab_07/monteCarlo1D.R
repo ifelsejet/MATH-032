@@ -9,10 +9,10 @@
 #f(x) = 3 x^2 + 1
 #Interval: 1 to 3
 
-integrand <- function(x) {1/((x**2)*((x**2)+25))} #<-- Will change based on function
+integrand <- function(x) {sin(x)} #<-- Will change based on function
 
-minX = 1;
-maxX = 5;
+minX = 0;
+maxX = 1;
 
 minY = 0; 
 maxY = 100;
@@ -30,7 +30,7 @@ plot(x, integrand(x),type = 'l',
 # (1) Calculus (i.e., By Hand) #
 ################################
 
-antiDerivative <- function(x) {(0.04/(x**2))+(-0.04/((x**2)+25))} #<--Will Need to Change
+antiDerivative <- function(x) {-cos(x)} #<--Will Need to Change
 calcIntegral = antiDerivative(maxX) - antiDerivative(minX);
 cat("Calculus (By Hand) Integral", "\t= ",calcIntegral,"\n")
 
