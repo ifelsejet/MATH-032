@@ -12,7 +12,7 @@ NumSamples  = 10000
 
 #What is the minimum and maximum range of our Uniform Distribution
 MinValue = 0
-MaxValue = 10 #<- Change: Copy Line 74
+MaxValue = 1 #<- Change: Copy Line 74
 
 ###################################################
 # Sample a Uniformly Distributed Random Variables #
@@ -26,18 +26,18 @@ sample1=runif(NumSamples,MinValue,MaxValue)
 
 numXCoords  = 20;
 xRangeOrig  = seq(MinValue,MaxValue,length.out=numXCoords);
-pdfOriginal = rep(1/10,numXCoords); #<- Change: Copy Line 90 Here.
+pdfOriginal = rep(1/1,numXCoords); #<- Change: Copy Line 90 Here.
 
 ###############################################################
 # Change: Transform Samples and Calculate New Theoretical PDF #
 ###############################################################
 
 #(1) Transform your samples
-transformedSample = sample1^2; #<- Change this line
+transformedSample = sample1^3; #<- Change this line
 
 #(2) What is the PDF of your sample (as a function of x)
 xRangeTransformed = seq(min(transformedSample),max(transformedSample),length.out=numXCoords);
-pdfTransformed    = 1/20*xRangeTransformed^(-1/2)  #<- Change this line
+pdfTransformed    = 1/3*xRangeTransformed^(-2/3)  #<- Change this line
   
 ####################################################
 # Generate Histograms of our Sample and its Square #
@@ -55,7 +55,7 @@ hist(sample1,probability= TRUE,
 lines(xRangeOrig, pdfOriginal,col='red')
 
 #Generate a Histogram of the Squares of the Samples 
-plotTitle = paste("Sample Squared\n \ # Samples =" , NumSamples,sep = "");
+plotTitle = paste("Sample Cubed\n \ # Samples =" , NumSamples,sep = "");
 hist(transformedSample,probability=TRUE,
      xlab="y", ylab="f(y)",
      main=plotTitle,xlim=c(0,max(xRangeTransformed)))
@@ -79,6 +79,7 @@ MaxValue = 1
 
 sample1=runif(NumSamples,MinValue,MaxValue)
 sample2=runif(NumSamples,MinValue,MaxValue)
+sample3=runif(NumSamples,MinValue,MaxValue)
 #<- Change this line
 
 ########################################
@@ -94,11 +95,11 @@ pdfOriginal = rep(1/1,numXCoords);
 ###############################################################
 
 #(1) Transform your samples (note there is also a pmax to take the max)
-sampleExtreme = pmin(sample1,sample2) #<- Change this line
+sampleExtreme = pmax(sample1,sample2,sample3) #<- Change this line
 
 #(2) What is the PDF of your sample (you need to calculate)
 xRangeExtreme = seq(min(sampleExtreme),max(sampleExtreme),length.out=numXCoords);
-pdfExtreme     = 2*(1-xRangeExtreme) #<- Change this line 
+pdfExtreme     = 3*(xRangeExtreme)^2 #<- Change this line 
 
 ####################################################
 # Generate Histograms of our Sample and its Square #
@@ -116,7 +117,7 @@ hist(sample1,probability= TRUE,
 lines(xRange,pdfOriginal,col='red')
 
 #Generate a Histogram of the Squares of the Samples
-plotTitle = paste("Minimum of 2 Uniform RV\n \ # Samples =" , NumSamples,sep = "");
+plotTitle = paste("Minimum of 3 Uniform RV\n \ # Samples =" , NumSamples,sep = "");
 hist(sampleExtreme,probability=TRUE,
      xlab="y", ylab="f(y)",
      main=plotTitle,
